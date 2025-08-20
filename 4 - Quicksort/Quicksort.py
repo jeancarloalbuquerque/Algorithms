@@ -1,17 +1,22 @@
 def quicksort(list):
+
     if len(list) < 2:
         return list
+    
     else:
         pivot = list[0]
+        list.pop(0)
+        left = []
+        right = []
 
-        less = [i for i in list[1:] if i < pivot]
-        greater = [i for i in list[1:] if i >= pivot]
+        for item in list:
+            if item < pivot:
+                left.append(item)
+            else:
+                right.append(item)
+        
+        return quicksort(left) + [pivot] + quicksort(right)
 
-        return quicksort(less) + [pivot] + quicksort(greater)
+list = [5, 7, 2, 3, 0, 1, 9, 4, 6, 8]
 
-calls = 0
-
-list = [5, 7, 2, 9, 6, 1, 3, 4, 0, 8]
-result = quicksort(list)
-
-print(result)
+print(quicksort(list))
