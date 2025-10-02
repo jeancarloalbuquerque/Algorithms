@@ -1,19 +1,21 @@
 class Solution(object):
     def twoSum(self, nums, target):
-        hashtable = {}
+        complement = {}
 
-        for num in nums:
-            complement = target - num
-            
-            if num in hashtable:
-                return [hashtable[num], num]
-            
-            hashtable[complement] = num
+        for i in range(len(nums)):
+            num = nums[i]
+            c = target - num
 
+            if num in complement:
+                return [complement[num], i]
+            
+            complement[c] = i
+            
         return False
-
     
-nums = [2, 2, 7, 11, 15]
+nums = [2,7,11,15]
 target = 17
 
 print(Solution().twoSum(nums, target))
+
+
