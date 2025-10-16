@@ -1,9 +1,14 @@
 from collections import deque
 
 class Graph:
+    """
+        https://www.w3resource.com/c-programming-exercises/graph/c-graph-exercises-3.php
+    """
+
     def __init__(self, n):
         self.nodes = n
         self.matrix = None
+
         self.createMatrix(n)
 
     def createMatrix(self, n) -> None:
