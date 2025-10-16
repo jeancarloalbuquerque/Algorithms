@@ -1,42 +1,55 @@
-INF = float("inf")
+from collections import deque
 
-grafo = {}
-grafo["Inicio"] = {'A': 5, 'B': 2}
-grafo["A"] = {'C': 4, 'D': 2}
-grafo["B"] = {'A': 8, 'D': 7}
-grafo["C"] = {'D': 6, 'Fim': 3}
-grafo["D"] = {'Fim': 1}
-grafo["Fim"] = {}
+class Graph:
+    def __init__(self, n):
+        self.nodes = n
+        self.matrix = None
+        self.createMatrix(n)
 
-custos = {'A': 5, 'B':2, 'C': INF, 'D': INF, 'Fim': INF}
-
-pais = {'A': 'Inicio', 'B': 'Inicio', 'C': None, 'D': None, 'Fim': None}
-
-processados = set()
-
-def menor_custo(graph):
-    menor_custo = float("inf")
-    no_menor_custo = None
-
-    for no in graph:
-        custo = custos[no]
-        if custo < menor_custo and no not in processados:
-            menor_custo = custo
-            no_menor_custo = no
+    def createMatrix(self, n) -> None:
+        self.matrix = [[0] * n for i in range(n)]
     
-    return no_menor_custo
+    def getMatrix(self) -> list:
+        return self.matrix
 
-no = menor_custo(custos)
+    def displayMatrix(self) -> None:
+        for i in range(self.nodes):
+            for j in range(self.nodes):
+                pass
+                print(f'{self.matrix[i][j]:>3}', end='')
+            print('')
 
-while no is not None:
-    custo = custos[no]
-    vizinhos = grafo[no]
-
-    for n in vizinhos.keys():
-        novo_custo = custo + vizinhos[n]
-        if custos[n] > novo_custo:
-            custos[n] = novo_custo
-            pais[n] = no
+    def addEdge(self, start, end, value = 1) -> None:
+        self.matrix[start][end] = value
+        self.matrix[end][start] = value
     
-    processados.add(no)
-    no = menor_custo(custos)
+    def removeEdge(self, start, end) -> None:
+        self.graph[start][end] = 0
+
+    def getNeighbours(self, node) -> list:
+        array = []
+        for i in range(self.nodes):
+            if self.matrix[node][i] != 0:
+                array.append(i)
+        return array
+
+    def bfSearch(self, start, end) -> bool:
+        queue = deque()
+        verified = set()
+
+        # Adiciona os vizinhos de start na fila
+        for n in self.getNeighbours(start):
+            queue.append(n)
+
+        while (len(queue) != 0):
+            element = queue.popleft()
+            
+            if element not in verified: 
+                if element == end:
+                    return True
+
+                for n in self.getNeighbours(element):
+                    queue.append(n)
+
+        return False
+        
