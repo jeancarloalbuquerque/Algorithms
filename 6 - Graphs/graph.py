@@ -3,6 +3,7 @@ from collections import deque
 class Graph:
     """
         https://www.w3resource.com/c-programming-exercises/graph/c-graph-exercises-3.php
+        Backtrace: https://www.baeldung.com/cs/dfs-vs-bfs-vs-dijkstra
     """
 
     def __init__(self, n):
@@ -38,23 +39,36 @@ class Graph:
                 array.append(i)
         return array
 
-    def bfSearch(self, start, end) -> bool:
-        queue = deque()
+    def bfs(self, start, end) -> bool:
         verified = set()
+        queue = deque([start])
+        parents = {start: None}
 
-        # Adiciona os vizinhos de start na fila
-        for n in self.getNeighbours(start):
-            queue.append(n)
-
-        while (len(queue) != 0):
+        while queue:
             element = queue.popleft()
             
             if element not in verified: 
-                if element == end:
-                    return True
+                verified.add(element)
 
-                for n in self.getNeighbours(element):
-                    queue.append(n)
+                if element == end:
+                    return self.backtrace(parents, start, end)
+
+                for neighbour in self.getNeighbours(element):
+                    queue.append(neighbour)
+
+                    if neighbour not in parents:
+                        parents[neighbour] = element
 
         return False
+    
+    def backtrace(self, parents, start, end):
+        path = [end]
+
+        while end != start:
+            end = parents[end]
+            path.append(end)
         
+        path.reverse()
+
+        return path
+            

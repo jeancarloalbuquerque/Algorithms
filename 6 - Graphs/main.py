@@ -9,8 +9,7 @@ grafo.addEdge(2, 3)
 
 # grafo.displayMatrix()
 
-
-print(grafo.bfSearch(0, 3))
+print(grafo.bfs(0, 3))
 
 """
 grafo.pesquisa_em_largura(0, 3)
