@@ -30,7 +30,8 @@ class Graph:
         self.matrix[end][start] = value
     
     def removeEdge(self, start, end) -> None:
-        self.graph[start][end] = 0
+        self.matrix[start][end] = 0
+        self.matrix[end][start] = 0
 
     def getNeighbours(self, node) -> list:
         array = []
