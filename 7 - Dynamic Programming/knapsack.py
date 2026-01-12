@@ -1,5 +1,5 @@
 w = 4
-items = [1, 2, 3]
+items = ['Violão', 'Rádio', 'Notebook']
 value = [1500, 3000, 2000]
 weight = [1, 4, 3]
 n = len(items)
@@ -18,5 +18,28 @@ for item in range(1, n + 1):
 
         table[item][capacity] = max(without_current_item, with_current_item)
 
-print(f'Max value: {table[n][w]}')
-print(table)
+
+selected = set()
+item, capacity = n, w
+
+while item > 0:
+    current = table[item][capacity]
+    previous = table[item - 1][capacity]
+
+    if current == previous:
+        item -= 1
+        continue
+
+    if current != previous:
+        selected.add(items[item - 1])
+
+        remaining = current - value[item - 1]
+
+        while previous != remaining and remaining > 0:
+            capacity -= 1
+            previous = table[item -1][capacity]
+
+    item -= 1
+
+print(f'Items selected: {selected}')
+print(f'Maximum value: {table[n][w]}')
