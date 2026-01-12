@@ -14,7 +14,7 @@ for item in range(1, n + 1):
 
         if capacity >= weight_current_item:
             remaining_capacity = capacity - weight_current_item
-            without_current_item = value[item - 1] + table[item - 1][remaining_capacity]
+            with_current_item = value[item - 1] + table[item - 1][remaining_capacity]
 
         table[item][capacity] = max(without_current_item, with_current_item)
 
