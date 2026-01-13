@@ -1,18 +1,17 @@
-
+import time
 
 def fibonacci(n):
-    global count
-    count += 1
-
     if n == 0 or n == 1:
         return n
     
     return fibonacci(n-1) + fibonacci(n-2)
 
-# count = 0
-# print(fibonacci(40), count) 
 
-for i in range(1, 40):
-    count = 0
-    fibonacci(i)
-    print(i, ";", count)
+
+n = 38
+
+start_time = time.time()
+print(f'Fib {n}: {fibonacci(n):,}') 
+end_time = time.time()
+
+print(f'\n--- Run time: {end_time - start_time:.3f}s ---')
