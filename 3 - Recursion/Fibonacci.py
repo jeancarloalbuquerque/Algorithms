@@ -6,12 +6,11 @@ def fibonacci(n):
     
     return fibonacci(n-1) + fibonacci(n-2)
 
-
-
 n = 38
 
 start_time = time.time()
-print(f'Fib {n}: {fibonacci(n):,}') 
-end_time = time.time()
+result = fibonacci(n)
+run_time = time.time() - start_time
 
-print(f'\n--- Run time: {end_time - start_time:.3f}s ---')
+print(f'Fib {n}: {result:,}') 
+print(f'\n--- Run time: {run_time:.3f}s ---')
