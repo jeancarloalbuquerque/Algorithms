@@ -15,6 +15,7 @@ class Knapsack:
         for item in range(1, self.n + 1):
             for capacity in range(1, w + 1):
                 weight = self.weights[item - 1] # weight of current item
+                add_item = 0
 
                 if capacity >= weight:
                     space_available = capacity - weight
